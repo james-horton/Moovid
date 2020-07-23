@@ -3,70 +3,32 @@ import covidTracking from '../apis/covidTracking';
 
 class Chart extends React.Component {
 
-    state = { historyStats: [] };
+    state = {historyStats: [], slope: 0};
 
     componentDidMount() {
+        window.google.charts.load('current', {packages: ['corechart', 'bar']});        
         this.fetchHistoryStats();
     }
 
-    buildChart(chartData) {
-        window.google.charts.load('current', {packages: ['corechart', 'bar']});
+    buildChart = chartData => {        
         window.google.charts.setOnLoadCallback(() => this.drawBasic(chartData));
     }    
 
-    drawBasic(chartData) {
-
+    drawBasic = chartData => {
+        
         var data = new window.google.visualization.DataTable();
         data.addColumn('string', 'Date');
         data.addColumn('number', 'Cases');
 
-        console.log(chartData);
+        //console.log(chartData);
 
-        data.addRows(
-            chartData
-             //[[{v: '07/12/2020', f: ''}, 12]]
-            // [{v: '07/13/2020', f: '07/13/2020'}, 8],
-            // [{v: '07/14/2020', f: '07/14/2020'}, 17],
-            // [{v: '07/15/2020', f: '07/15/2020'}, 20],
-            // [{v: '07/16/2020', f: '07/16/2020'}, 22],
-            // [{v: '07/17/2020', f: '07/17/2020'}, 26],
-            // [{v: '07/18/2020', f: '07/18/2020'}, 32],
-            
-            // [{v: new Date(2020,6,12), f: '07/12/2020'}, 12],
-            // [{v: new Date(2020,6,13), f: '07/13/2020'}, 8],
-            // [{v: new Date(2020,6,14), f: '07/14/2020'}, 17],
-            // [{v: new Date(2020,6,15), f: '07/15/2020'}, 20],
-            // [{v: new Date(2020,6,16), f: '07/16/2020'}, 22],
-            // [{v: new Date(2020,6,17), f: '07/17/2020'}, 26],
-            // [{v: new Date(2020,6,18), f: '07/18/2020'}, 32],
-
-            //[{v: '07/19/2020', f: '07/19/2020'}, 2],
-            // [{v: [10, 0, 0], f:'10 am'}, 3],
-            // [{v: [11, 0, 0], f: '11 am'}, 4],
-            // [{v: [12, 0, 0], f: '12 pm'}, 5],
-            // [{v: [13, 0, 0], f: '1 pm'}, 6],
-            // [{v: [14, 0, 0], f: '2 pm'}, 7],
-            // [{v: [15, 0, 0], f: '3 pm'}, 8],
-            // [{v: [16, 0, 0], f: '4 pm'}, 9],
-            // [{v: [17, 0, 0], f: '5 pm'}, 10],
-        );
-
-        //var shortDateFormat = new window.google.visualization.DateFormat({formatType: 'short'});
-        //shortDateFormat.format(data, 1);
+        data.addRows(chartData);
 
         var options = {
             title: '7 Day Case Count',
             legend: 'none',
             width: 1150,
             height: 500,
-            //hAxis: {
-                //title: 'Date' 
-                //format: 'MMddyy',
-                // viewWindow: {
-                //     min: new Date(2020,6,12),
-                //     max: new Date(2020,6,18)
-                // }
-            //},
             vAxis: {
                 title: 'Number of Cases'
             }
@@ -80,44 +42,82 @@ class Chart extends React.Component {
     }
 
     fetchHistoryStats = async () => {
-        const response = await covidTracking.get('states/nc/daily.json');
 
+        const response = await covidTracking.get('states/nc/daily.json');
         const size = 7;
         let day = size;
+       
         let history = response.data.slice(0, size).map(({date, positiveIncrease}) => {
             return {date: date.toString(), positiveIncrease, day: day--};
         });
 
         history = history.reverse();
-        //console.log(history);
-
-        let newHistory = history.map(({date, positiveIncrease}) => {
+        const slope = this.calculateSlope(history);
+        
+        let sortedHistory = history.map(({date, positiveIncrease}) => {
             const yr = date.substring(0, 4);
             const month = date.substring(4, 6);
             const day = date.substring(6, 8);
-            const newDate = month + '/' + day + '/' + yr;
-            return [newDate, positiveIncrease] 
+            const formattedDate = month + '/' + day + '/' + yr;
+            return [formattedDate, positiveIncrease] 
         });
-        //console.log(newHistory);    
 
-        this.setState({historyStats: newHistory });
-        
-        //this.buildChart(newHistory);
+        this.setState({historyStats: sortedHistory, slope: slope});
     }
 
-    // TODO: build chart
+    calculateSlope = stats => {
+
+        if (stats.length > 0) {
+
+            const sum = array => array.reduce((a, b) => a + b);
+            const average = array => array.reduce((a, b) => a + b) / array.length;
+            
+            const days = stats.map( ({day}) => { return day });
+            const cases = stats.map( ({positiveIncrease}) => { return positiveIncrease });
+            
+            // console.log('days: ' + days);
+            // console.log('cases: ' + cases);
+            
+            const meanX = average(days);
+            const meanY = average(cases);
+
+            // console.log('meanX: ' + meanX);
+            // console.log('meanY: ' + meanY);
+
+            const slopePoints = stats.map( ({day, positiveIncrease}) => {
+                const xiMinusMeanX = day - meanX;
+                const yiMinusMeanY = positiveIncrease - meanY;
+                const product = xiMinusMeanX * yiMinusMeanY;
+                const xiMinusMeanXSquared = xiMinusMeanX * xiMinusMeanX;
+                return {product, xiMinusMeanXSquared};
+            });
+
+            //console.log(slopePoints);
+
+            const products = slopePoints.map( ({product}) => { return product });
+            const xiMinusMeanXSquareds = slopePoints.map( ({xiMinusMeanXSquared}) => { return xiMinusMeanXSquared });
+            const numerator = sum(products);
+            const denominator = sum(xiMinusMeanXSquareds);
+            if (denominator === 0) return 0;
+
+            return numerator / denominator;         
+        }
+    }
 
     render() {
         
         if (this.state.historyStats.length > 0) {
             this.buildChart(this.state.historyStats);
-            return <div id="chart_div"></div>
-        } else {
-            console.log('no historyStats set');
-        }
+            console.log('slope: ' + this.state.slope);
+            return (
+                <div>
+                    <div id="chart_div"></div>
+                </div>
+            );
+        } 
 
         // TODO: add load animation
-        return <div>Loading Chart...</div>
+        return <div>Loading Chart...</div>;
     }
 }
 
