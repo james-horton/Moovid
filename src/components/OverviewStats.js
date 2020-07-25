@@ -10,15 +10,14 @@ class OverviewStats extends React.Component {
     }
 
     fetchOverviewstats = async () => {
-        const response = await covidTracking.get('states/nc/current.json');         
-        //console.log(response.data);
+        const response = await covidTracking.get(`states/${this.props.stateAbbrev}/current.json`);         
         this.setState({currentStats: response.data})
     }  
 
     render() {
         if (this.state.currentStats) {
             
-            const { positive, hospitalizedCurrently, death, positiveIncrease } = this.state.currentStats;
+            const { positive, hospitalizedCurrently, death } = this.state.currentStats;
 
             return (
                 <h3>
