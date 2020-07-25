@@ -8,7 +8,8 @@ const App = () => {
     return (
         <div className="ui container">
             <h1>Moovid</h1>
-            <Chart />
+            <OverviewStats stateAbbrev="nc" />
+            <Chart stateAbbrev="nc" />
         </div>
     );
 };

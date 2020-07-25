@@ -43,7 +43,7 @@ class Chart extends React.Component {
 
     fetchHistoryStats = async () => {
 
-        const response = await covidTracking.get('states/nc/daily.json');
+        const response = await covidTracking.get(`states/${this.props.stateAbbrev}/daily.json`);
         const size = 7;
         let day = size;
        
@@ -58,7 +58,7 @@ class Chart extends React.Component {
             const yr = date.substring(0, 4);
             const month = date.substring(4, 6);
             const day = date.substring(6, 8);
-            const formattedDate = month + '/' + day + '/' + yr;
+            const formattedDate = `${month}/${day}/${yr}`;
             return [formattedDate, positiveIncrease] 
         });
 
@@ -108,7 +108,7 @@ class Chart extends React.Component {
         
         if (this.state.historyStats.length > 0) {
             this.buildChart(this.state.historyStats);
-            console.log('slope: ' + this.state.slope);
+            console.log(`slope: ${this.state.slope.toFixed(2)}`);
             return (
                 <div>
                     <div id="chart_div"></div>
