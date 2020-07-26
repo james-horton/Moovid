@@ -1,9 +1,10 @@
 import React from 'react';
 import covidTracking from '../apis/covidTracking';
+import Grade from './Grade';
 
 class Chart extends React.Component {
 
-    state = {historyStats: [], slope: 0};
+    state = {historyStats: [], slope: null};
 
     componentDidMount() {
         window.google.charts.load('current', {packages: ['corechart', 'bar']});        
@@ -112,6 +113,7 @@ class Chart extends React.Component {
             return (
                 <div>
                     <div id="chart_div"></div>
+                    <Grade slope={this.state.slope} stateName={this.props.stateName} />
                 </div>
             );
         } 
