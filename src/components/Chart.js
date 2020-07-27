@@ -4,7 +4,7 @@ import Grade from './Grade';
 
 class Chart extends React.Component {
 
-    state = {historyStats: [], slope: null};
+    state = {historyStats: [], slope: 0};
 
     componentDidMount() {
         window.google.charts.load('current', {packages: ['corechart', 'bar']});        
