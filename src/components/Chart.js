@@ -1,5 +1,6 @@
 import React from 'react';
 import covidTracking from '../apis/covidTracking';
+import Grade from './Grade';
 
 class Chart extends React.Component {
 
@@ -112,6 +113,7 @@ class Chart extends React.Component {
             return (
                 <div>
                     <div id="chart_div"></div>
+                    <Grade slope={this.state.slope} stateName={this.props.stateName} />
                 </div>
             );
         } 

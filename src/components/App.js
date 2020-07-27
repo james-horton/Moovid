@@ -9,7 +9,7 @@ const App = () => {
         <div className="ui container">
             <h1>Moovid</h1>
             <OverviewStats stateAbbrev="nc" />
-            <Chart stateAbbrev="nc" />
+            <Chart stateAbbrev="nc" stateName="North Carolina" />
         </div>
     );
 };
