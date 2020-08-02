@@ -1,0 +1,34 @@
+
+body {   
+    background-color: #d0f3dc;
+    background-image: radial-gradient(circle, #eafff1, #96d0a8);
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/*
+#root {
+    background-image: radial-gradient(circle, #e66465, #9198e5);
+}
+*/
+
+/* red blue - test shape
+background-image: radial-gradient(circle, #e66465, #9198e5);
+*/
+
+/* darker color #96d0a8 */ 
+
+/*
+background: radial-gradient(circle at center, #d0f3dc, #96d0a8);
+*/
+
+/* blue for chart 
+#a7dee5
+*/
+

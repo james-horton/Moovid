@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Grade.module.css';
 
 import Happy1 from '../images/happy1.jpeg';
 import Happy2 from '../images/happy2.jpeg';
@@ -50,9 +51,8 @@ const Grade = props =>  {
 
     return (
         <div>
-            <div>Grade: {props.slope}</div>
-            <p>{message}</p>
-            <img src={photo} alt={altText} />
+            <p className={styles.msg}>{message}</p>
+            <img className={styles.image} src={photo} alt={altText} />
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from './Spinner';
 import covidTracking from '../apis/covidTracking';
 
 class OverviewStats extends React.Component {
@@ -20,16 +21,38 @@ class OverviewStats extends React.Component {
             const { positive, hospitalizedCurrently, death } = this.state.currentStats;
 
             return (
-                <h3>
-                    <div>Cases: {positive.toLocaleString()}</div>
-                    <div>Currently Hospitalized: {hospitalizedCurrently.toLocaleString()}</div>
-                    <div>Deaths: {death.toLocaleString()}</div>
-                </h3>
+                <div className="ui statistics">
+                    <div className="statistic">
+                        <div className="label">
+                            Cases
+                        </div>
+                        <div className="value">
+                            {positive.toLocaleString()}
+                        </div>
+                    </div>
+
+                    <div className="statistic">
+                        <div className="label">
+                            Currently Hospitalized
+                        </div>
+                        <div className="value">
+                            {hospitalizedCurrently.toLocaleString()}
+                        </div>
+                    </div>
+
+                    <div className="statistic">
+                        <div className="label">
+                        Deaths
+                        </div>
+                        <div className="value">
+                            {death.toLocaleString()}
+                        </div>
+                    </div>
+                </div>
             );
         }
-
-        // TODO: add load animation 
-        return <div>Loading Overview...</div>
+                
+        return <Spinner message="Loading Stats..." />;
     }
 }
 

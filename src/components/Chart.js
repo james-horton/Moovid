@@ -1,10 +1,15 @@
 import React from 'react';
 import covidTracking from '../apis/covidTracking';
 import Grade from './Grade';
+import Spinner from './Spinner';
 
 class Chart extends React.Component {
 
-    state = {historyStats: [], slope: 0};
+    constructor(props) {
+        super(props);
+        this.spinnerControl = React.createRef();
+        this.state = {historyStats: [], slope: 0};
+    }    
 
     componentDidMount() {
         window.google.charts.load('current', {packages: ['corechart', 'bar']});        
@@ -40,6 +45,10 @@ class Chart extends React.Component {
         );
 
         chart.draw(data, options);
+        
+        if (this.spinnerControl.current.isShowing()) {
+            this.spinnerControl.current.hide();
+        }
     }
 
     fetchHistoryStats = async () => {
@@ -104,7 +113,7 @@ class Chart extends React.Component {
             return numerator / denominator;         
         }
     }
-
+    
     render() {
         
         if (this.state.historyStats.length > 0) {
@@ -112,14 +121,16 @@ class Chart extends React.Component {
             console.log(`slope: ${this.state.slope.toFixed(2)}`);
             return (
                 <div>
+                    <Spinner ref={this.spinnerControl} message="Loading Chart..." />
                     <div id="chart_div"></div>
                     <Grade slope={this.state.slope} stateName={this.props.stateName} />
                 </div>
             );
         } 
 
-        // TODO: add load animation
-        return <div>Loading Chart...</div>;
+        console.log('Chart.js render');
+        
+        return <Spinner message="Loading Chart..." />;
     }
 }
 
