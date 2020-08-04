@@ -4,31 +4,40 @@ body {
     background-image: radial-gradient(circle, #eafff1, #96d0a8);
 }
 
+.center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .center-image {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-
-
-/*
-#root {
-    background-image: radial-gradient(circle, #e66465, #9198e5);
+.padding-top-space {
+    padding-top: 50px;
 }
-*/
 
-/* red blue - test shape
-background-image: radial-gradient(circle, #e66465, #9198e5);
-*/
+.padding-bottom-space {
+    padding-bottom: 50px;
+}
 
-/* darker color #96d0a8 */ 
+.no-margin {
+    margin: 0px;
+}
 
-/*
-background: radial-gradient(circle at center, #d0f3dc, #96d0a8);
-*/
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(5vh);
+    visibility: hidden;
+    transition: opacity 1s ease-out, transform 1.2s ease-out;
+    will-change: opacity, visibility;
+}
 
-/* blue for chart 
-#a7dee5
-*/
-
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
