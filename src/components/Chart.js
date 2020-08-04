@@ -3,17 +3,27 @@ import covidTracking from '../apis/covidTracking';
 import Grade from './Grade';
 import Spinner from './Spinner';
 
+import FadeInSection from './FadeInSection';
+
 class Chart extends React.Component {
 
     constructor(props) {
         super(props);
         this.spinnerControl = React.createRef();
+        this.gradeComponent = React.createRef();
         this.state = {historyStats: [], slope: 0};
     }    
 
     componentDidMount() {
-        window.google.charts.load('current', {packages: ['corechart', 'bar']});        
-        this.fetchHistoryStats();
+        if (window.google) {
+            window.google.charts.load('current', {packages: ['corechart', 'bar']});             
+            this.fetchHistoryStats();
+        } 
+    }
+
+    chartLoaded = () => {
+        this.spinnerControl.current.hide();    
+        this.gradeComponent.current.show();        
     }
 
     buildChart = chartData => {        
@@ -31,24 +41,30 @@ class Chart extends React.Component {
         data.addRows(chartData);
 
         var options = {
-            title: '7 Day Case Count',
+            title: 'Seven Day Case Count',
             legend: 'none',
             width: 1150,
             height: 500,
             vAxis: {
                 title: 'Number of Cases'
-            }
+            },
+            // dark green
+            colors: ['#004411'], 
+            backgroundColor: 'transparent',           
+            fontName: 'Lato',
+            fontSize: 20,
+            titleTextStyle: {
+                fontSize: 25,
+                bold: false
+            }            
         };        
 
         var chart = new window.google.visualization.ColumnChart(
             document.getElementById('chart_div')
         );
 
+        window.google.visualization.events.addListener(chart, 'ready', this.chartLoaded); 
         chart.draw(data, options);
-        
-        if (this.spinnerControl.current.isShowing()) {
-            this.spinnerControl.current.hide();
-        }
     }
 
     fetchHistoryStats = async () => {
@@ -65,10 +81,9 @@ class Chart extends React.Component {
         const slope = this.calculateSlope(history);
         
         let sortedHistory = history.map(({date, positiveIncrease}) => {
-            const yr = date.substring(0, 4);
             const month = date.substring(4, 6);
             const day = date.substring(6, 8);
-            const formattedDate = `${month}/${day}/${yr}`;
+            const formattedDate = `${month}/${day}`;
             return [formattedDate, positiveIncrease] 
         });
 
@@ -113,23 +128,29 @@ class Chart extends React.Component {
             return numerator / denominator;         
         }
     }
-    
+
     render() {
         
         if (this.state.historyStats.length > 0) {
             this.buildChart(this.state.historyStats);
             console.log(`slope: ${this.state.slope.toFixed(2)}`);
             return (
-                <div>
-                    <Spinner ref={this.spinnerControl} message="Loading Chart..." />
-                    <div id="chart_div"></div>
-                    <Grade slope={this.state.slope} stateName={this.props.stateName} />
+                <div className="padding-top-space">  
+
+                    <Spinner ref={this.spinnerControl} message="Loading Chart..." />   
+
+                    <FadeInSection >                                  
+                        <div id="chart_div" className="padding-bottom-space"></div>    
+                    </FadeInSection>   
+
+                    <FadeInSection >                                 
+                        <Grade ref={this.gradeComponent} slope={this.state.slope} stateName={this.props.stateName} />     
+                    </FadeInSection>   
+
                 </div>
             );
         } 
 
-        console.log('Chart.js render');
-        
         return <Spinner message="Loading Chart..." />;
     }
 }
