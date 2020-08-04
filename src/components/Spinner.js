@@ -13,9 +13,11 @@ class Spinner extends React.Component {
     
     if (this.state.show) {
       return (
-        <div className="ui active centered inline huge text loader">
-          <div className="ui text loader">Loading</div>
-          { this.props.message }
+        <div className="padding-bottom-space">
+          <div className="ui active centered inline huge text loader">
+            <div className="ui text loader">Loading</div>
+            { this.props.message }
+          </div>
         </div>
       );
     }
