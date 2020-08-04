@@ -9,52 +9,70 @@ import Disappointed1 from '../images/disappointed1.jpeg';
 import Disappointed2 from '../images/disappointed2.jpeg';
 import Disappointed3 from '../images/disappointed3.jpeg';
 
-const happyPhotos = [Happy1, Happy2, Happy3, Happy4];
-const disappointedPhotos = [Disappointed1, Disappointed2, Disappointed3];
 
-const moose = 'Moose';
-const happyMessages = [
-    'happy to see cases going down in',
-    'quite pleased to see the number of cases going down in',
-    'glad to see a downward trend in cases in'
-];
+class Grade extends React.Component  {
 
-const disappointedMessages = [
-    'disappointed to see cases going up in',
-    'a bit miffed to see the number of cases going up in',
-    'displeased to see an upward trend in cases in'
-];
+    constructor(props) {
+        super(props);
 
-const Grade = props =>  {
+        this.state = {show: false};
 
-    let message;
-    let photo;
-    let altText;
+        this.happyPhotos = [Happy1, Happy2, Happy3, Happy4];
+        this.disappointedPhotos = [Disappointed1, Disappointed2, Disappointed3];
+        
+        this.moose = 'Moose';
+        this.happyMessages = [
+            'happy to see cases going down in',
+            'quite pleased to see the number of cases going down in',
+            'glad to see a downward trend in cases in'
+        ];
+        
+        this.disappointedMessages = [
+            'disappointed to see cases going up in',
+            'a bit miffed to see the number of cases going up in',
+            'displeased to see an upward trend in cases in'
+        ];
 
-    if (props.slope > 0) {
+        this.photo = null;
+        this.message = '';        
+        this.altText = '';    
+        
+        if (this.props.slope > 0) {
 
-        message = `${moose} is 
-        ${disappointedMessages[Math.floor(Math.random() * disappointedMessages.length)]} 
-        ${props.stateName}`;
+            this.message = `${this.moose} is 
+            ${this.disappointedMessages[Math.floor(Math.random() * this.disappointedMessages.length)]} 
+            ${this.props.stateName}`;
+    
+            this.photo = this.disappointedPhotos[Math.floor(Math.random() * this.disappointedPhotos.length)];
+            this.altText = 'Disappointed';
+        } else {
 
-        photo = disappointedPhotos[Math.floor(Math.random() * disappointedPhotos.length)];
-        altText = 'Disappointed';
-    } else {
+            this.message = `${this.moose} is 
+            ${this.happyMessages[Math.floor(Math.random() * this.happyMessages.length)]} 
+            ${this.props.stateName}`;
+    
+            this.photo = this.happyPhotos[Math.floor(Math.random() * this.happyPhotos.length)];
+            this.altText = 'Happy';
+        }  
+    }   
 
-        message = `${moose} is 
-        ${happyMessages[Math.floor(Math.random() * happyMessages.length)]} 
-        ${props.stateName}`;
+    show = () => this.setState({show: true});
 
-        photo = happyPhotos[Math.floor(Math.random() * happyPhotos.length)];
-        altText = 'Happy';
+    render() {
+        
+        if (this.state.show) {      
+            return (                
+                <div>
+                    <p className={`${styles.msg} center-text`} key='1'>
+                        {this.message}
+                    </p>
+                    <img className={`${styles.image} center-image`} src={this.photo} alt={this.altText} key='2'/>
+                </div>   
+            );
+        } 
+
+        return null;
     }
-
-    return (
-        <div>
-            <p className={styles.msg}>{message}</p>
-            <img className={styles.image} src={photo} alt={altText} />
-        </div>
-    );
 }
 
 export default Grade;
