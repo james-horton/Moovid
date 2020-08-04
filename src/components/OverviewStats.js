@@ -21,31 +21,34 @@ class OverviewStats extends React.Component {
             const { positive, hospitalizedCurrently, death } = this.state.currentStats;
 
             return (
-                <div className="ui statistics">
-                    <div className="statistic">
-                        <div className="label">
-                            Cases
-                        </div>
-                        <div className="value">
-                            {positive.toLocaleString()}
-                        </div>
-                    </div>
+                <div className="padding-bottom-space">
+                    <div className="ui grid statistics three column row">
 
-                    <div className="statistic">
-                        <div className="label">
-                            Currently Hospitalized
+                        <div className="statistic column">
+                            <div className="label">
+                                Cases
+                            </div>
+                            <div className="value">
+                                {positive.toLocaleString()}
+                            </div>
                         </div>
-                        <div className="value">
-                            {hospitalizedCurrently.toLocaleString()}
-                        </div>
-                    </div>
 
-                    <div className="statistic">
-                        <div className="label">
-                        Deaths
+                        <div className="statistic column">
+                            <div className="label">
+                                Currently Hospitalized
+                            </div>
+                            <div className="value">
+                                {hospitalizedCurrently.toLocaleString()}
+                            </div>
                         </div>
-                        <div className="value">
-                            {death.toLocaleString()}
+
+                        <div className="statistic column">
+                            <div className="label">
+                            Deaths
+                            </div>
+                            <div className="value">
+                                {death.toLocaleString()}
+                            </div>
                         </div>
                     </div>
                 </div>
