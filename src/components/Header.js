@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Header.module.css';
-import avatar from '../images/mooBlue.jpg';
+import avatar from '../images/moo.png';
 import titleLogo from '../images/moovid-logo.png'
 
 const Header = () => {
