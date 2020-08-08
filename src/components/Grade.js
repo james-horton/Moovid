@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Grade.module.css';
 
-import Happy1 from '../images/happy1.jpeg';
-import Happy2 from '../images/happy2.jpeg';
-import Happy3 from '../images/happy3.jpeg';
-import Happy4 from '../images/happy4.jpeg';
-import Disappointed1 from '../images/disappointed1.jpeg';
-import Disappointed2 from '../images/disappointed2.jpeg';
-import Disappointed3 from '../images/disappointed3.jpeg';
+import Happy1 from '../images/happy1.jpg';
+import Happy2 from '../images/happy2.jpg';
+import Happy3 from '../images/happy3.jpg';
+import Happy4 from '../images/happy4.jpg';
+import Disappointed1 from '../images/disappointed1.jpg';
+import Disappointed2 from '../images/disappointed2.jpg';
+import Disappointed3 from '../images/disappointed3.jpg';
 
 
 class Grade extends React.Component  {
@@ -53,7 +53,7 @@ class Grade extends React.Component  {
     
             this.photo = this.happyPhotos[Math.floor(Math.random() * this.happyPhotos.length)];
             this.altText = 'Happy';
-        }  
+        }          
     }   
 
     show = () => this.setState({show: true});

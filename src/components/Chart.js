@@ -77,7 +77,6 @@ class Chart extends React.Component {
 
     resizeChart = () => {
         if (this.chart && this.data && this.options) {
-            console.log('resize called');
             this.drawChart();
         }
     }
