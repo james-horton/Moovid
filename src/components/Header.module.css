@@ -1,0 +1,10 @@
+.header {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.headerlogo {    
+    width: 18%;
+    height: auto; 
+    padding-bottom: 6px;
+}

@@ -1,0 +1,47 @@
+
+body {   
+    background-color: #d0f3dc;
+    background-image: radial-gradient(circle, #eafff1, #96d0a8);
+}
+
+.center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.padding-top-space {
+    padding-top: 50px;
+}
+
+.padding-bottom-space {
+    padding-bottom: 50px;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(5vh);
+    visibility: hidden;
+    transition: opacity 1s ease-out, transform 1.2s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
+
+#chart_div {
+    padding-left: 50px;
+}
