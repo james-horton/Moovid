@@ -29,7 +29,7 @@ class Chart extends React.Component {
 
     chartLoaded = () => {
         this.spinnerControl.current.hide();
-        this.gradeComponent.current.show();
+        this.gradeComponent.current.show();        
     }
 
     buildChart = chartData => {
@@ -39,7 +39,7 @@ class Chart extends React.Component {
     setupChartOptions = () => {
 
         this.options = {
-            title: 'Seven Day Case Count',
+            title: 'Seven Day COVID Case Count',
             legend: 'none',
             height: 500,
             vAxis: {
@@ -87,7 +87,7 @@ class Chart extends React.Component {
 
     fetchHistoryStats = async () => {
 
-        const response = await covidTracking.get(`states/${this.props.stateAbbrev}/daily.json`);
+        const response = await covidTracking.get(`states/${this.props.stateCode}/daily.json`);
         const size = 7;
         let day = size;
 
@@ -147,23 +147,34 @@ class Chart extends React.Component {
         }
     }
 
+    // TODO: add chartLoading state to manage renders? have doubts that will work bc statename change will still
+    // cause a rerender.
+
+    // OR... add a new state called ready: false/true to control visibility. This might solve the problem of not having
+    // to hide components and show later after the data and chart is loaded. Parent App.js can pass value as a prop
     render() {
 
         if (this.state.historyStats.length > 0) {
+           
             this.buildChart(this.state.historyStats);
             console.log(`slope: ${this.state.slope.toFixed(2)}`);
             return (
                 <div className="padding-top-space">
 
-                    <Spinner ref={this.spinnerControl} message="Loading Chart..." />
+                    <Spinner ref={this.spinnerControl} message="Loading Chart..." /> 
 
                     <FadeInSection >
                         <div id="chart_div" className="padding-bottom-space"></div>
                     </FadeInSection>
 
                     <FadeInSection >
-                        <Grade ref={this.gradeComponent} slope={this.state.slope} stateName={this.props.stateName} />
-                    </FadeInSection>
+                        <Grade 
+                            ref={this.gradeComponent} 
+                            slope={this.state.slope} 
+                            stateName={this.props.stateName}
+                            key={this.props.stateName} 
+                        />
+                    </FadeInSection>                                   
 
                 </div>
             );

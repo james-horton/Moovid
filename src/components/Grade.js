@@ -22,21 +22,24 @@ class Grade extends React.Component  {
         
         this.moose = 'Moose';
         this.happyMessages = [
-            'happy to see cases going down in',
-            'quite pleased to see the number of cases going down in',
-            'glad to see a downward trend in cases in'
+            'happy to see COVID cases going down in',
+            'quite pleased to see the number of COVID cases going down in',
+            'glad to see a downward trend in COVID cases in'
         ];
         
         this.disappointedMessages = [
-            'disappointed to see cases going up in',
-            'a bit miffed to see the number of cases going up in',
-            'displeased to see an upward trend in cases in'
+            'disappointed to see COVID cases going up in',
+            'a bit miffed to see the number of COVID cases going up in',
+            'displeased to see an upward trend in COVID cases in'
         ];
 
         this.photo = null;
         this.message = '';        
-        this.altText = '';    
-        
+        this.altText = '';           
+    }   
+
+    setRandomPhotoMessage = () => {
+
         if (this.props.slope > 0) {
 
             this.message = `${this.moose} is 
@@ -45,6 +48,7 @@ class Grade extends React.Component  {
     
             this.photo = this.disappointedPhotos[Math.floor(Math.random() * this.disappointedPhotos.length)];
             this.altText = 'Disappointed';
+
         } else {
 
             this.message = `${this.moose} is 
@@ -54,19 +58,26 @@ class Grade extends React.Component  {
             this.photo = this.happyPhotos[Math.floor(Math.random() * this.happyPhotos.length)];
             this.altText = 'Happy';
         }          
-    }   
+    }
 
     show = () => this.setState({show: true});
+    hide = () => this.setState({show: false});  
 
     render() {
         
-        if (this.state.show) {      
+        if (this.state.show) {  
+
+            this.setRandomPhotoMessage();
+            
             return (                
                 <div>
                     <p className={`${styles.msg} center-text`} key='1'>
                         {this.message}
                     </p>
-                    <img className={`${styles.image} center-image`} src={this.photo} alt={this.altText} key='2'/>
+                    <img className={`${styles.image} center-image`} 
+                         src={this.photo} 
+                         alt={this.altText} key='2'
+                    />
                 </div>   
             );
         } 
