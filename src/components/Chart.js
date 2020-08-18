@@ -147,11 +147,6 @@ class Chart extends React.Component {
         }
     }
 
-    // TODO: add chartLoading state to manage renders? have doubts that will work bc statename change will still
-    // cause a rerender.
-
-    // OR... add a new state called ready: false/true to control visibility. This might solve the problem of not having
-    // to hide components and show later after the data and chart is loaded. Parent App.js can pass value as a prop
     render() {
 
         if (this.state.historyStats.length > 0) {
