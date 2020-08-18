@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'https://covidtracking.com/api/v1/'
+    baseURL: 'https://api.covidtracking.com/api/v1/'
 });
