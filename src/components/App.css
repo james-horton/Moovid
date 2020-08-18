@@ -1,7 +1,7 @@
 
 body {   
-    background-color: #d0f3dc;
-    background-image: radial-gradient(circle, #eafff1, #96d0a8);
+    background-color: #d0f3dc !important;
+    background-image: radial-gradient(circle, #eafff1, #96d0a8) !important;
 }
 
 .center-text {

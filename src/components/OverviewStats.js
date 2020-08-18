@@ -7,11 +7,11 @@ class OverviewStats extends React.Component {
     state = {currentStats: null};
     
     componentDidMount() {
-        this.fetchOverviewstats();
+        this.fetchOverviewStats();
     }
 
-    fetchOverviewstats = async () => {
-        const response = await covidTracking.get(`states/${this.props.stateAbbrev}/current.json`);         
+    fetchOverviewStats = async () => {
+        const response = await covidTracking.get(`states/${this.props.stateCode}/current.json`);         
         this.setState({currentStats: response.data})
     }  
 
