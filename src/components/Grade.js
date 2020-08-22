@@ -35,12 +35,14 @@ class Grade extends React.Component  {
 
         this.photo = null;
         this.message = '';        
-        this.altText = '';           
+        this.altText = '';        
+        
+        this.setRandomPhotoMessage();
     }   
 
     setRandomPhotoMessage = () => {
 
-        if (this.props.slope > 0) {
+        if (this.props.slope > 0) {            
 
             this.message = `${this.moose} is 
             ${this.disappointedMessages[Math.floor(Math.random() * this.disappointedMessages.length)]} 
@@ -67,8 +69,6 @@ class Grade extends React.Component  {
         
         if (this.state.show) {  
 
-            this.setRandomPhotoMessage();
-            
             return (                
                 <div>
                     <p className={`${styles.msg} center-text`} key='1'>
