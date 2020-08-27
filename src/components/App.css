@@ -45,3 +45,13 @@ body {
 #chart_div {
     padding-left: 50px;
 }
+
+.ui.loader:after {
+    border-color: #004411 transparent transparent !important;
+}
+
+@media only screen and (max-width: 600px) {
+    #chart_div {
+        padding-left: 15px;
+    }   
+}

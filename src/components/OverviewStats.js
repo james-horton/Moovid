@@ -1,18 +1,41 @@
 import React from 'react';
 import Spinner from './Spinner';
+import axios from 'axios';
 import covidTracking from '../apis/covidTracking';
 
 class OverviewStats extends React.Component {
 
-    state = {currentStats: null};
+    constructor(props) {
+        super(props);
+        this.state = {currentStats: null};
+        this.source = axios.CancelToken.source();
+        this.responseStatus = null;
+    }
     
     componentDidMount() {
         this.fetchOverviewStats();
     }
 
+    componentWillUnmount() {
+        if (this.responseStatus === null) 
+            this.source.cancel('fetch cancelled');
+    }
+
     fetchOverviewStats = async () => {
-        const response = await covidTracking.get(`states/${this.props.stateCode}/current.json`);         
-        this.setState({currentStats: response.data})
+
+        try {
+            const response = await covidTracking.get(
+                `states/${this.props.stateCode}/current.json`,
+                { cancelToken: this.source.token }
+            ); 
+
+            this.responseStatus = response.status;
+            
+            this.setState({currentStats: response.data})
+
+        } catch(err) {
+            console.log(err);
+        }        
     }  
 
     render() {
