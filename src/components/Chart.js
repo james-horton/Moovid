@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import covidTracking from '../apis/covidTracking';
 import Grade from './Grade';
 import Spinner from './Spinner';
@@ -15,16 +16,25 @@ class Chart extends React.Component {
         this.data = null;
         this.options = null;
         this.chart = null;
+        this.source = axios.CancelToken.source();
+        this.responseStatus = null;
+
         this.state = { historyStats: [], slope: 0 };
     }
 
     componentDidMount() {
         if (window.google) {
-            window.google.charts.load('current', { packages: ['corechart', 'bar'] });
+            window.google.charts.load('current', { packages: ['corechart'] });
             this.fetchHistoryStats();
-            this.setupChartOptions();
+            this.setChartOptions();
+            this.setResizeChartOptions();
             window.onresize = this.resizeChart;
         }
+    }
+
+    componentWillUnmount() {
+        if (this.responseStatus === null) 
+            this.source.cancel('fetch canceled');
     }
 
     chartLoaded = () => {
@@ -36,24 +46,36 @@ class Chart extends React.Component {
         window.google.charts.setOnLoadCallback(() => this.drawBasic(chartData));
     }
 
-    setupChartOptions = () => {
+    setChartOptions = () => {
 
         this.options = {
             title: 'Seven Day COVID Case Count',
             legend: 'none',
-            height: 500,
             vAxis: {
                 title: 'Number of Cases'
-            },
-            // dark green
-            colors: ['#004411'],
+            },            
+            colors: ['#004411'], // dark green
             backgroundColor: 'transparent',
             fontName: 'Lato',
             titleTextStyle: {
-                fontSize: 25,
                 bold: false
             }
         };
+    }
+
+    setResizeChartOptions = () => {
+        // mobile
+        if (window.innerWidth <= 600)
+        {
+            this.options.titleTextStyle.fontSize = 18;
+            this.options.height = 400;
+            this.options.fontSize = 14;
+        // everything else
+        } else {
+            this.options.titleTextStyle.fontSize = 25;
+            this.options.height = 500;
+            this.options.fontSize = 16;
+        }
     }
 
     drawBasic = chartData => {
@@ -61,11 +83,7 @@ class Chart extends React.Component {
         this.data = new window.google.visualization.DataTable();
         this.data.addColumn('string', 'Date');
         this.data.addColumn('number', 'Cases');
-
-        //console.log(chartData);
-
         this.data.addRows(chartData);
-        this.setupChartOptions();
 
         this.chart = new window.google.visualization.ColumnChart(
             document.getElementById('chart_div')
@@ -77,6 +95,7 @@ class Chart extends React.Component {
 
     resizeChart = () => {
         if (this.chart && this.data && this.options) {
+            this.setResizeChartOptions();
             this.drawChart();
         }
     }
@@ -87,25 +106,36 @@ class Chart extends React.Component {
 
     fetchHistoryStats = async () => {
 
-        const response = await covidTracking.get(`states/${this.props.stateCode}/daily.json`);
-        const size = 7;
-        let day = size;
+        try {
+            const response = await covidTracking.get(
+                `states/${this.props.stateCode}/daily.json`,
+                { cancelToken: this.source.token }
+            );
 
-        let history = response.data.slice(0, size).map(({ date, positiveIncrease }) => {
-            return { date: date.toString(), positiveIncrease, day: day-- };
-        });
+            this.responseStatus = response.status;
+            
+            const size = 7;
+            let day = size;
 
-        history = history.reverse();
-        const slope = this.calculateSlope(history);
+            let history = response.data.slice(0, size).map(({ date, positiveIncrease }) => {
+                return { date: date.toString(), positiveIncrease, day: day-- };
+            });
 
-        let sortedHistory = history.map(({ date, positiveIncrease }) => {
-            const month = date.substring(4, 6);
-            const day = date.substring(6, 8);
-            const formattedDate = `${month}/${day}`;
-            return [formattedDate, positiveIncrease]
-        });
+            history = history.reverse();
+            const slope = this.calculateSlope(history);
 
-        this.setState({ historyStats: sortedHistory, slope: slope });
+            let sortedHistory = history.map(({ date, positiveIncrease }) => {
+                const month = date.substring(4, 6);
+                const day = date.substring(6, 8);
+                const formattedDate = `${month}/${day}`;
+                return [formattedDate, positiveIncrease]
+            });
+
+            this.setState({ historyStats: sortedHistory, slope: slope });
+
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     calculateSlope = stats => {
@@ -154,6 +184,7 @@ class Chart extends React.Component {
             this.buildChart(this.state.historyStats);
             console.log(`slope: ${this.state.slope.toFixed(2)}`);
             return (
+                
                 <div className="padding-top-space">
 
                     <Spinner ref={this.spinnerControl} message="Loading Chart..." /> 
