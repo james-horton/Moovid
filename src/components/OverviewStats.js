@@ -9,6 +9,7 @@ class OverviewStats extends React.Component {
         super(props);
         this.state = {currentStats: null};
         this.source = axios.CancelToken.source();
+        this.responseStatus = null;
     }
     
     componentDidMount() {
@@ -16,7 +17,8 @@ class OverviewStats extends React.Component {
     }
 
     componentWillUnmount() {
-        this.source.cancel('fetch cancelled');
+        if (this.responseStatus === null) 
+            this.source.cancel('fetch cancelled');
     }
 
     fetchOverviewStats = async () => {
@@ -26,6 +28,8 @@ class OverviewStats extends React.Component {
                 `states/${this.props.stateCode}/current.json`,
                 { cancelToken: this.source.token }
             ); 
+
+            this.responseStatus = response.status;
             
             this.setState({currentStats: response.data})
 
