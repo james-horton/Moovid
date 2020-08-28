@@ -5,6 +5,7 @@ import Header from './Header';
 import StateSelection from './StateSelection';
 import OverviewStats from './OverviewStats';
 import Chart from './Chart';
+import Footer from './Footer';
 
 import './App.css';
 
@@ -24,20 +25,23 @@ class App extends React.PureComponent {
         // using a key on components to create a new instance rather than update the current one due to 
         // multiple rerenders caused by the stateCode prop changing and waiting to fetch data from API.
         return (    
-            <Container>
-                <Header />
-                <StateSelection onSelectionSubmit={this.onSelectionSubmit} 
-                                defaultStateCode={stateCode}
-                                defaultStateName={stateName}
-                />
-                
-                <OverviewStats key={'1' + stateCode} stateCode={this.state.stateCode} /> 
+            <div>
+                <Container>
+                    <Header />
+                    <StateSelection onSelectionSubmit={this.onSelectionSubmit} 
+                                    defaultStateCode={stateCode}
+                                    defaultStateName={stateName}
+                    />
+                    
+                    <OverviewStats key={'1' + stateCode} stateCode={this.state.stateCode} /> 
 
-                <Chart key={'2' + stateCode} 
-                       stateCode={stateCode} 
-                       stateName={stateName} 
-                />
-            </Container>                    
+                    <Chart key={'2' + stateCode} 
+                        stateCode={stateCode} 
+                        stateName={stateName} 
+                    />
+                </Container>   
+                <Footer />      
+            </div>           
         );
     }
 };
