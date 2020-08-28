@@ -1,0 +1,29 @@
+.footer {
+    background-color: #415542;
+    color: white;
+    height: 100px;
+    font-size: 16px;
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.padding {
+    padding-bottom: 10px;
+}
+
+.link,
+.link:link,
+.link:visited {
+    color: #d0f3dc;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
