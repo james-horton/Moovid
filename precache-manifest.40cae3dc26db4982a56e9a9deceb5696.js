@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "36d8f16ff5ef47f710884340a5681657",
+    "revision": "e4245245b1c1d5dfebd221f1e3ca6ba9",
     "url": "/moovid/index.html"
   },
   {
-    "revision": "9f41297f0e7610853fe4",
+    "revision": "8dae96d1d991ca004f69",
     "url": "/moovid/static/css/2.ae18081c.chunk.css"
   },
   {
-    "revision": "8f8079e16d6123551e8b",
-    "url": "/moovid/static/css/main.f5eb1f9e.chunk.css"
+    "revision": "0e9aa8c5c8b1c141ff89",
+    "url": "/moovid/static/css/main.3a6e4878.chunk.css"
   },
   {
-    "revision": "9f41297f0e7610853fe4",
-    "url": "/moovid/static/js/2.479f73ab.chunk.js"
+    "revision": "8dae96d1d991ca004f69",
+    "url": "/moovid/static/js/2.2fda5e6c.chunk.js"
   },
   {
     "revision": "5bd09eb7f2cf4d145d532d862be18942",
-    "url": "/moovid/static/js/2.479f73ab.chunk.js.LICENSE.txt"
+    "url": "/moovid/static/js/2.2fda5e6c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8f8079e16d6123551e8b",
-    "url": "/moovid/static/js/main.814ca35a.chunk.js"
+    "revision": "0e9aa8c5c8b1c141ff89",
+    "url": "/moovid/static/js/main.041b2573.chunk.js"
   },
   {
     "revision": "082c228a525d1fa03d7c",
