@@ -6,7 +6,8 @@
     position: relative;
 }
 
-.center {
+.position {
+    /* center */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -26,4 +27,21 @@
 
 .link:hover {
     text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .position {
+        /* remove center alignment and position on left side */
+        font-size: 14px;
+        position: absolute;
+        top: initial;        
+        transform: initial;
+        left: 30px;
+    }   
+
+    .padding {
+        padding-top: 25px;
+        padding-bottom: 10px;
+    }
 }
