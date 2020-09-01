@@ -8,6 +8,10 @@ import Happy4 from '../images/happy4.jpg';
 import Disappointed1 from '../images/disappointed1.jpg';
 import Disappointed2 from '../images/disappointed2.jpg';
 import Disappointed3 from '../images/disappointed3.jpg';
+import Disappointed4 from '../images/disappointed4.jpg';
+import Disappointed5 from '../images/disappointed5.jpg';
+import Concerned1 from '../images/concerned1.jpg';
+import Optimistic1 from '../images/optimistic1.jpg';
 
 
 class Grade extends React.Component  {
@@ -18,7 +22,12 @@ class Grade extends React.Component  {
         this.state = {show: false};
 
         this.happyPhotos = [Happy1, Happy2, Happy3, Happy4];
-        this.disappointedPhotos = [Disappointed1, Disappointed2, Disappointed3];
+        this.disappointedPhotos = [
+            Disappointed1, Disappointed2, Disappointed3,
+            Disappointed4, Disappointed5
+        ];
+        this.concernedPhotos = [Concerned1];
+        this.optimisticPhotos = [Optimistic1];
         
         this.moose = 'Moose';
         this.happyMessages = [
@@ -33,6 +42,14 @@ class Grade extends React.Component  {
             'displeased to see an upward trend in COVID cases in'
         ];
 
+        this.concernedMessages = [
+            'concerned about COVID cases going up in'
+        ];
+
+        this.optimisticMessages = [
+            'optimistic about COVID cases going down in'
+        ];
+
         this.photo = null;
         this.message = '';        
         this.altText = '';        
@@ -42,23 +59,43 @@ class Grade extends React.Component  {
 
     setRandomPhotoMessage = () => {
 
-        if (this.props.slope > 0) {            
+        const {slope, stateName } = this.props;
+        
+        if (slope > 5) {
 
+            this.altText = 'Disappointed';
             this.message = `${this.moose} is 
             ${this.disappointedMessages[Math.floor(Math.random() * this.disappointedMessages.length)]} 
-            ${this.props.stateName}`;
+            ${stateName}`;
     
             this.photo = this.disappointedPhotos[Math.floor(Math.random() * this.disappointedPhotos.length)];
-            this.altText = 'Disappointed';
+
+        } else if (slope >= 0) {            
+
+            this.altText = 'Concerned';
+            this.message = `${this.moose} is 
+            ${this.concernedMessages[Math.floor(Math.random() * this.concernedMessages.length)]} 
+            ${stateName}`;
+    
+            this.photo = this.concernedPhotos[Math.floor(Math.random() * this.concernedPhotos.length)];
+
+        } else if (slope >= -5) {
+
+            this.altText = 'Optimistic';        
+            this.message = `${this.moose} is 
+            ${this.optimisticMessages[Math.floor(Math.random() * this.optimisticMessages.length)]} 
+            ${stateName}`;
+    
+            this.photo = this.optimisticPhotos[Math.floor(Math.random() * this.optimisticPhotos.length)];
 
         } else {
 
+            this.altText = 'Happy';        
             this.message = `${this.moose} is 
             ${this.happyMessages[Math.floor(Math.random() * this.happyMessages.length)]} 
-            ${this.props.stateName}`;
+            ${stateName}`;
     
             this.photo = this.happyPhotos[Math.floor(Math.random() * this.happyPhotos.length)];
-            this.altText = 'Happy';
         }          
     }
 
