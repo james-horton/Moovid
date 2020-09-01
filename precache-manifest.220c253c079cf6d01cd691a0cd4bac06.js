@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e4245245b1c1d5dfebd221f1e3ca6ba9",
+    "revision": "4b29a2fd7e29d36b3ff995aff20f27df",
     "url": "/moovid/index.html"
   },
   {
-    "revision": "8dae96d1d991ca004f69",
+    "revision": "f831c58590ef66e731e5",
     "url": "/moovid/static/css/2.ae18081c.chunk.css"
   },
   {
-    "revision": "0e9aa8c5c8b1c141ff89",
-    "url": "/moovid/static/css/main.3a6e4878.chunk.css"
+    "revision": "37afb9cf77f0533e816c",
+    "url": "/moovid/static/css/main.3c778c52.chunk.css"
   },
   {
-    "revision": "8dae96d1d991ca004f69",
-    "url": "/moovid/static/js/2.2fda5e6c.chunk.js"
+    "revision": "f831c58590ef66e731e5",
+    "url": "/moovid/static/js/2.eb3dcdb4.chunk.js"
   },
   {
     "revision": "5bd09eb7f2cf4d145d532d862be18942",
-    "url": "/moovid/static/js/2.2fda5e6c.chunk.js.LICENSE.txt"
+    "url": "/moovid/static/js/2.eb3dcdb4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0e9aa8c5c8b1c141ff89",
-    "url": "/moovid/static/js/main.041b2573.chunk.js"
+    "revision": "37afb9cf77f0533e816c",
+    "url": "/moovid/static/js/main.5f806715.chunk.js"
   },
   {
     "revision": "082c228a525d1fa03d7c",
@@ -48,6 +48,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/moovid/static/media/brand-icons.e8c322de.woff2"
   },
   {
+    "revision": "5b3a9be04e1aebf9da5210fb8d995044",
+    "url": "/moovid/static/media/concerned1.5b3a9be0.jpg"
+  },
+  {
     "revision": "b799bc0f38e159f01259e59c4570fe97",
     "url": "/moovid/static/media/disappointed1.b799bc0f.jpg"
   },
@@ -58,6 +62,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "abd85bf4a92fd20036630ab0f3b5099e",
     "url": "/moovid/static/media/disappointed3.abd85bf4.jpg"
+  },
+  {
+    "revision": "ee5122c5ed31f0d9002fb4a22ef5286b",
+    "url": "/moovid/static/media/disappointed4.ee5122c5.jpg"
+  },
+  {
+    "revision": "bcfe1c1a0dbee335d9372d75e7d6d69a",
+    "url": "/moovid/static/media/disappointed5.bcfe1c1a.jpg"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
@@ -106,6 +118,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "7d14eba48f1a1fac015dd02aa893b3b5",
     "url": "/moovid/static/media/moovid-logo.7d14eba4.png"
+  },
+  {
+    "revision": "6a38bbac64767113afd4d9f01ed0fca4",
+    "url": "/moovid/static/media/optimistic1.6a38bbac.jpg"
   },
   {
     "revision": "701ae6abd4719e9c2ada3535a497b341",
