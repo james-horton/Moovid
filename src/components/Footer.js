@@ -4,7 +4,7 @@ import styles from './Footer.module.css';
 const Footer = () => {
     return (
         <div className={styles.footer}>
-            <div className={styles.center}>
+            <div className={styles.position}>
 
                 <div className={styles.padding}>                    
                     Data provided by &nbsp;
@@ -14,7 +14,7 @@ const Footer = () => {
                     </a>
                     .                   
                 </div>
-                
+
                 <div>                    
                     Chart built using &nbsp;
                     <a className={styles.link}
