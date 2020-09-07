@@ -29,7 +29,8 @@ class Grade extends React.Component  {
         this.concernedPhotos = [Concerned1];
         this.optimisticPhotos = [Optimistic1];
         
-        this.moose = 'Moose';
+        this.name = 'Moose';
+        
         this.happyMessages = [
             'happy to see COVID cases going down in',
             'quite pleased to see the number of COVID cases going down in',
@@ -57,45 +58,45 @@ class Grade extends React.Component  {
         this.setRandomPhotoMessage();
     }   
 
+    getRandomPhoto = photos => {
+        return photos[Math.floor(Math.random() * photos.length)];
+    }
+
+    getRandomMessage = messages => {
+        return `${this.name} is 
+            ${messages[Math.floor(Math.random() * messages.length)]} 
+            ${this.props.stateName}`;
+    }
+
     setRandomPhotoMessage = () => {
 
-        const {slope, stateName } = this.props;
+        const slope = this.props.slope;
+
+        const slopes = {
+            DISAPPOINTED: 5,
+            CONCERNED: 0,
+            OPTIMISTIC: -5
+        };
         
-        if (slope > 5) {
-
+        if (slope > slopes.DISAPPOINTED) {
             this.altText = 'Disappointed';
-            this.message = `${this.moose} is 
-            ${this.disappointedMessages[Math.floor(Math.random() * this.disappointedMessages.length)]} 
-            ${stateName}`;
-    
-            this.photo = this.disappointedPhotos[Math.floor(Math.random() * this.disappointedPhotos.length)];
+            this.message = this.getRandomMessage(this.disappointedMessages);     
+            this.photo = this.getRandomPhoto(this.disappointedPhotos);
 
-        } else if (slope >= 0) {            
-
+        } else if (slope >= slopes.CONCERNED) { 
             this.altText = 'Concerned';
-            this.message = `${this.moose} is 
-            ${this.concernedMessages[Math.floor(Math.random() * this.concernedMessages.length)]} 
-            ${stateName}`;
-    
-            this.photo = this.concernedPhotos[Math.floor(Math.random() * this.concernedPhotos.length)];
+            this.message = this.getRandomMessage(this.concernedMessages);     
+            this.photo = this.getRandomPhoto(this.concernedPhotos);
 
-        } else if (slope >= -5) {
-
-            this.altText = 'Optimistic';        
-            this.message = `${this.moose} is 
-            ${this.optimisticMessages[Math.floor(Math.random() * this.optimisticMessages.length)]} 
-            ${stateName}`;
-    
-            this.photo = this.optimisticPhotos[Math.floor(Math.random() * this.optimisticPhotos.length)];
+        } else if (slope >= slopes.OPTIMISTIC) {
+            this.altText = 'Optimistic';                
+            this.message = this.getRandomMessage(this.optimisticMessages);     
+            this.photo = this.getRandomPhoto(this.optimisticPhotos);
 
         } else {
-
-            this.altText = 'Happy';        
-            this.message = `${this.moose} is 
-            ${this.happyMessages[Math.floor(Math.random() * this.happyMessages.length)]} 
-            ${stateName}`;
-    
-            this.photo = this.happyPhotos[Math.floor(Math.random() * this.happyPhotos.length)];
+            this.altText = 'Happy';       
+            this.message = this.getRandomMessage(this.happyMessages);     
+            this.photo = this.getRandomPhoto(this.happyPhotos); 
         }          
     }
 
