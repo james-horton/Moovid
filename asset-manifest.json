@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/moovid/static/css/main.3c778c52.chunk.css",
-    "main.js": "/moovid/static/js/main.5f806715.chunk.js",
-    "main.js.map": "/moovid/static/js/main.5f806715.chunk.js.map",
+    "main.js": "/moovid/static/js/main.59a06710.chunk.js",
+    "main.js.map": "/moovid/static/js/main.59a06710.chunk.js.map",
     "runtime-main.js": "/moovid/static/js/runtime-main.8592b1d9.js",
     "runtime-main.js.map": "/moovid/static/js/runtime-main.8592b1d9.js.map",
     "static/css/2.ae18081c.chunk.css": "/moovid/static/css/2.ae18081c.chunk.css",
     "static/js/2.eb3dcdb4.chunk.js": "/moovid/static/js/2.eb3dcdb4.chunk.js",
     "static/js/2.eb3dcdb4.chunk.js.map": "/moovid/static/js/2.eb3dcdb4.chunk.js.map",
     "index.html": "/moovid/index.html",
-    "precache-manifest.220c253c079cf6d01cd691a0cd4bac06.js": "/moovid/precache-manifest.220c253c079cf6d01cd691a0cd4bac06.js",
+    "precache-manifest.75acfdab45f2f878978626a865852976.js": "/moovid/precache-manifest.75acfdab45f2f878978626a865852976.js",
     "service-worker.js": "/moovid/service-worker.js",
     "static/css/2.ae18081c.chunk.css.map": "/moovid/static/css/2.ae18081c.chunk.css.map",
     "static/css/main.3c778c52.chunk.css.map": "/moovid/static/css/main.3c778c52.chunk.css.map",
@@ -34,6 +34,6 @@
     "static/css/2.ae18081c.chunk.css",
     "static/js/2.eb3dcdb4.chunk.js",
     "static/css/main.3c778c52.chunk.css",
-    "static/js/main.5f806715.chunk.js"
+    "static/js/main.59a06710.chunk.js"
   ]
 }
