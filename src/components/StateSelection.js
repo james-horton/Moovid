@@ -66,7 +66,8 @@ class StateSelection extends React.Component {
        this.setState({ stateCode: value, stateName: e.currentTarget.textContent });
     }
 
-    onButtonClick = () => {
+    onFormSubmit = event => {
+        event.preventDefault();
         this.props.onSelectionSubmit(this.state.stateCode, this.state.stateName);
     }
     
@@ -74,21 +75,23 @@ class StateSelection extends React.Component {
 
         return (     
             <div className="center-text padding-bottom-space">
-                <Dropdown
-                    placeholder='State'
-                    search
-                    selection
-                    value={this.state.stateCode}
-                    onChange={this.onSelectionChange}
-                    options={this.stateOptions}
-                />
+                <form onSubmit={this.onFormSubmit}>
+                    <Dropdown
+                        placeholder="State"
+                        search
+                        selection
+                        value={this.state.stateCode}
+                        onChange={this.onSelectionChange}
+                        options={this.stateOptions}
+                    />
 
-                <Button 
-                    basic 
-                    color='green'
-                    onClick={this.onButtonClick}
-                > Submit
-                </Button>
+                    <Button 
+                        basic 
+                        color="green"
+                        type="submit"
+                    > Submit
+                    </Button>
+                </form>
 
             </div>
         );
