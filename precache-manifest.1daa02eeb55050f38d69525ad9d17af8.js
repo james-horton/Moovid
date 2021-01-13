@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7b86c556172887fc817ccbecaa0e5c28",
+    "revision": "be515eba3b8090a42f7fd362da292d42",
     "url": "/moovid/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/moovid/static/css/2.ae18081c.chunk.css"
   },
   {
-    "revision": "119ac44d5f10ae82b9c3",
+    "revision": "f4bee6c80d8e25e913f8",
     "url": "/moovid/static/css/main.3c778c52.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/moovid/static/js/2.0a24851c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "119ac44d5f10ae82b9c3",
-    "url": "/moovid/static/js/main.dc52a7fc.chunk.js"
+    "revision": "f4bee6c80d8e25e913f8",
+    "url": "/moovid/static/js/main.9a4f49d4.chunk.js"
   },
   {
     "revision": "082c228a525d1fa03d7c",

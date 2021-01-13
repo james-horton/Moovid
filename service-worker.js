@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/moovid/precache-manifest.a5291bec49077f23ec255462409bb0da.js"
+  "/moovid/precache-manifest.1daa02eeb55050f38d69525ad9d17af8.js"
 );
 
 self.addEventListener('message', (event) => {
